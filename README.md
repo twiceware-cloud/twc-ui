@@ -1,4 +1,6 @@
-Accessible shadcn/ui compatible react components, optimized for Laravel and Inertia.
+shadcn/ui compatible react aria components, optimized for Laravel and Inertia – that you can copy and paste into your apps. 
+Accessible. Customizable. Open Source.
+
 
 ## Getting Started
 
@@ -21,5 +23,3 @@ Released under the [MIT license](https://github.com/paceui/paceui/blob/main/LICE
 Use it.
 Remix it.
 Make it yours.
-
-![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/twiceware-cloud/ui?utm_source=oss&utm_medium=github&utm_campaign=twiceware-cloud%2Fui&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)

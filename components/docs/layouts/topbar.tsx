@@ -1,17 +1,13 @@
 'use client'
 
+import { MenuIcon, MilestoneIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import type { ClassNameValue } from 'tailwind-merge'
 import { Drawer } from 'vaul'
 import { HugeiconsIcon } from '@hugeicons/react'
-import {
-  Github01Icon,
-  BlueskyIcon,
-  DirectionRight02Icon,
-  Menu02Icon
-} from '@hugeicons/core-free-icons'
+import { Github01Icon, BlueskyIcon } from '@hugeicons/core-free-icons'
 
 import { Sidebar, type SidebarNavItem } from '@/components/docs/layouts'
 import { Logo } from '@/components/docs/logo'
@@ -38,7 +34,7 @@ export const Topbar = ({ menuItems = [], className, showLogo = false }: TopbarPr
   const items: SidebarNavItem[] = [
     {
       title: 'Navigation',
-      icon: DirectionRight02Icon,
+      icon: <MilestoneIcon />,
       expanded: true,
       items: [
         {
@@ -65,7 +61,7 @@ export const Topbar = ({ menuItems = [], className, showLogo = false }: TopbarPr
               className="cursor-pointer md:hidden"
               aria-label="Leftmenu toggle"
             >
-              <HugeiconsIcon icon={Menu02Icon} className="!size-5" />
+              <MenuIcon className="!size-5" />
             </Button>
           </Drawer.Trigger>
           <Drawer.Portal>

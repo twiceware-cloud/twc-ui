@@ -1,4 +1,5 @@
 import { Footer, Topbar } from '@/components/docs/layouts'
+import { Newsletter } from '@/components/docs/newsletter'
 
 import { Demo } from './components/demo'
 import { Feature } from './components/feature'
@@ -16,6 +17,7 @@ export default function LandingPage() {
         <div className="container-wrapper max-2xl:!px-4">
           <Hero />
           <Feature />
+          <Demo />
         </div>
       </div>
       <div className="sticky top-0 z-10 border-t border-dashed bg-background/90">

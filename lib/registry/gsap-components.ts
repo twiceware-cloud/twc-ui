@@ -10,7 +10,7 @@ export const gsapComponentRegistries: RegistryItem[] = [
       {
         path: 'twc-ui/tooltip.tsx',
         type: 'registry:ui',
-        target: 'components/ui/twc-ui/tooltip.tsx'
+        target: '~/components/ui/twc-ui/tooltip.tsx'
       }
     ]
   },

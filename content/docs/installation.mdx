@@ -13,18 +13,29 @@ description: How to install dependencies and organize your app structure.
     <Step>Create project</Step>
 
     Run the `init` (with default options) command to create a new Next.js project or set up an existing one:
-
     <InstallationCommand command="npx shadcn@canary init -d"/>
+
+    <Step>Add tailwindcss-react-aria-components</Step>
+
+    <InstallationCommand command="npm install -D tailwindcss-react-aria-components"/>
+
+
+    <Step>Add tailwindcss-react-aria-components to your styles</Step>
+
+    <InstallationCommand command="npm install -D tailwindcss-react-aria-components"/>
+
+    <CodePreview code={`@plugin "tailwindcss-react-aria-components";`}/>
+
 
     <Step>That's it</Step>
 
     You’re ready to start adding components to your project
 
-    <InstallationCommand command='pnpm dlx shadcn@canary add "~website/r/twc-ui/text-reveal"' />
+    <InstallationCommand command='npx shadcn@canary add "~website/r/gsap/text-reveal"' />
 
     The command above will add the `TextReveal` component to your project. You can then import it using the following syntax:
 
-    <CodePreview code={`import { TextReveal } from "@/components/twc-ui/text-reveal" // [!code highlight]
+    <CodePreview code={`import { TextReveal } from "@/components/gsap/text-reveal" // [!code highlight]
 
         export default function Home() {
             return (

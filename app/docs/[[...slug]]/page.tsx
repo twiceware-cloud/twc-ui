@@ -83,7 +83,7 @@ export default async function Page(props: PageProps) {
             )}
           </div>
         </div>
-        <h2 className="py-2 font-medium text-foreground">{page.description}</h2>
+        <h2 className="text-muted-foreground max-sm:text-sm">{page.description}</h2>
         {page.links && (
           <div className="mt-4 flex gap-2">
             {page.links.api && (
@@ -113,7 +113,7 @@ export default async function Page(props: PageProps) {
           <p className="font-medium">Contribute</p>
           <div className="mt-2 space-y-1.5">
             <Link
-              href={`https://github.com/twiceware-cloud/ui/blob/main/content/${url}.mdx`}
+              href={`https://github.com/paceui/paceui/blob/main/content/${url}.mdx`}
               target="_blank"
               className="flex items-center gap-2 text-foreground/70 transition-all hover:text-foreground"
             >

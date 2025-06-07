@@ -25,19 +25,19 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground data-[hovered]:bg-primary/90 active:ring-ring/20 ',
+          'bg-primary text-primary-foreground data-[hovered]:bg-primary/90 pressed:ring-ring/50 active:ring-ring/50 ',
         destructive:
-          'bg-destructive text-destructive-foreground text-white data-[hovered]:bg-destructive/90 active:ring-destructive/50',
+          'bg-destructive text-destructive-foreground text-white data-[hovered]:bg-destructive/90 pressed:ring-destructive/50',
         outline:
-          'border border-input bg-background  data-[hovered]:bg-accent data-[hovered]:text-accent-foreground focus-visible:ring-ring/20 active:ring-ring/50',
+          'border border-input bg-background  data-[hovered]:bg-accent data-[hovered]:text-accent-foreground focus-visible:ring-ring/20 pressed:ring-ring/50',
         secondary: 'bg-secondary text-secondary-foreground  data-[hovered]:bg-secondary/80',
         ghost:
-          'data-[hovered]:bg-accent data-[hovered]:text-accent-foreground active:ring-ring/20 focus-visible:border focus-visible:border-primary focus-visible:ring-ring/20 active:ring-ring/50 text-sm',
+          'data-[hovered]:bg-accent data-[hovered]:text-accent-foreground focus-visible:border focus-visible:border-primary focus-visible:ring-ring/20 pressed:ring-ring/50 text-sm',
         link: 'text-primary underline-offset-4 data-[hovered]:underline',
         toolbar:
-          'data-[hovered]:bg-accent data-[hovered]:text-accent-foreground active:ring-ring/20 focus-visible:border focus-visible:border-primary focus-visible:ring-ring/20 active:ring-ring/50 text-sm',
+          'data-[hovered]:bg-accent data-[hovered]:text-accent-foreground pressed:ring-ring/50 active:ring-ring/50 focus-visible:border focus-visible:border-primary focus-visible:ring-ring/20  text-sm',
         'toolbar-default':
-          'border border-input bg-background  data-[hovered]:bg-accent data-[hovered]:text-accent-foreground focus-visible:ring-ring/20 active:ring-ring/50 text-sm'
+          'border border-input bg-background  data-[hovered]:bg-accent data-[hovered]:text-accent-foreground focus-visible:ring-ring/20 pressed:ring-ring/50 text-sm'
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -61,6 +61,7 @@ export interface BaseButtonProps extends AriaButtonProps, VariantProps<typeof bu
   disabled?: boolean
   icon?: IconSvgElement
   iconClassName?: string
+  slot?: string | null
   title?: string
 }
 
@@ -74,6 +75,7 @@ export const BaseButton = ({
   loading,
   icon,
   iconClassName,
+  slot,
   children,
   title = '',
   ...props
@@ -103,6 +105,7 @@ export const BaseButton = ({
     <AriaButton
       form={form}
       type={type}
+      slot={slot}
       isDisabled={disabled || loading}
       isPending={loading}
       className={composeRenderProps(className, className =>

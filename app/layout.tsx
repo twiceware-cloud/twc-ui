@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: {
     template: '%s | twc-ui',
     default:
-      'twc-ui – shadcn/ui compatible react aria components, optimized for Laravel and Inertia – that you can copy and paste into your apps. Accessible. Customizable. Open Source.'
+      'twc-ui – Shadcn like components with react-aria-components and optimizations for Inertia.js with Laravel'
   },
   metadataBase: new URL('https://ui.twiceware.cloud/'),
   description:

@@ -29,7 +29,7 @@ const features: Feature[] = [
 
 export const Feature = () => {
   return (
-    <div className="my-6 gap-16 overflow-hidden sm:mt-12 lg:mt-16 xl:mt-24 2xl:mt-32">
+    <div className="mt-6 gap-16 overflow-hidden sm:mt-12 lg:mt-16 xl:mt-24 2xl:mt-32">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
         {features.map(({ icon: Icon, description, title }, index) => (
           <div key={index} className="flex flex-col items-center rounded p-5">

@@ -41,7 +41,8 @@ const ComponentPage = () => {
           Components
         </p>
         <p className="mt-1 max-w-xl text-center text-muted-foreground max-sm:text-sm">
-          Accessible shadcn/ui compatible react components optimized for Inertia (Laravel).
+          Beautiful, animated components that respond smoothly, feel natural, and elevate user
+          experience.
         </p>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:mt-12 xl:gap-8">
