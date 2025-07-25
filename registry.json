@@ -29,6 +29,130 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Date field",
+      "description": "Date field component",
+      "dependencies": [
+        "class-variance-authority",
+        "react-aria-components",
+        "@internationalized/date",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://twc-ui.test/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/calendar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/calendar.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Checkbox",
+      "dependencies": [
+        "class-variance-authority",
+        "react-aria-components"
+      ],
+      "registryDependencies": [
+        "https://twc-ui.test/r/form.json",
+        "https://twc-ui.test/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/checkbox.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "date-field",
+      "type": "registry:ui",
+      "title": "Date field",
+      "description": "Date field component",
+      "dependencies": [
+        "class-variance-authority",
+        "react-aria-components",
+        "@internationalized/date",
+        "date-fns"
+      ],
+      "registryDependencies": [
+        "https://twc-ui.test/r/form.json",
+        "https://twc-ui.test/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/date-field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/date-field.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Text field",
+      "description": "Text field component",
+      "dependencies": [
+        "class-variance-authority",
+        "react-aria-components",
+        "@hugeicons/core-free-icons",
+        "date-fns",
+        "@react-types/shared",
+        "@internationalized/date"
+      ],
+      "registryDependencies": [
+        "https://twc-ui.test/r/form.json",
+        "https://twc-ui.test/r/button.json",
+        "https://twc-ui.test/r/icon.json",
+        "https://twc-ui.test/r/field.json",
+        "https://twc-ui.test/r/date-field.json"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/date-picker.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Field component",
+      "dependencies": [
+        "class-variance-authority",
+        "react-aria-components"
+      ],
+      "registryDependencies": [
+        "https://twc-ui.test/r/form.json"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/field.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "form-errors",
       "type": "registry:ui",
       "title": "Error section",
@@ -50,6 +174,21 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "form-group",
+      "type": "registry:ui",
+      "title": "Form Group",
+      "description": "Form Group",
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/form-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/form-group.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "form",
       "type": "registry:ui",
       "title": "Form",
@@ -60,7 +199,7 @@
       ],
       "registryDependencies": [
         "https://twc-ui.test/r/form-errors.json",
-        "https://twc-ui.test/r/use-form.json"
+        "https://twc-ui.test/r/use-twc-ui-form.json"
       ],
       "files": [
         {
@@ -92,6 +231,134 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "list-box",
+      "type": "registry:ui",
+      "title": "List box",
+      "description": "List box component",
+      "dependencies": [
+        "react-aria-components",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/list-box.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/list-box.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "number-field",
+      "type": "registry:ui",
+      "title": "Number field",
+      "description": "Number field component",
+      "dependencies": [
+        "class-variance-authority",
+        "react-aria-components"
+      ],
+      "registryDependencies": [
+        "https://twc-ui.test/r/form.json",
+        "https://twc-ui.test/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/number-field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/number-field.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "popover",
+      "description": "popover component",
+      "dependencies": [
+        "react-aria-components"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/popover.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "select",
+      "type": "registry:ui",
+      "title": "select",
+      "description": "select component",
+      "dependencies": [
+        "class-variance-authority",
+        "react-aria-components",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://twc-ui.test/r/list-box.json",
+        "https://twc-ui.test/r/field.json",
+        "https://twc-ui.test/r/form.json",
+        "https://twc-ui.test/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/select.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "tabs",
+      "description": "tabs component",
+      "dependencies": [
+        "class-variance-authority",
+        "react-aria-components"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/tabs.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "text-field",
+      "type": "registry:ui",
+      "title": "Text field",
+      "description": "Text field component",
+      "dependencies": [
+        "class-variance-authority",
+        "react-aria-components"
+      ],
+      "registryDependencies": [
+        "https://twc-ui.test/r/form.json",
+        "https://twc-ui.test/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "resources/js/components/twc-ui/text-field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/twc-ui/text-field.tsx"
+        }
+      ],
+      "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
@@ -111,7 +378,7 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "use-form",
+      "name": "use-twc-ui-form",
       "type": "registry:hook",
       "title": "useForm-Hook",
       "description": "useForm-Hook with Laravel Precognition",
@@ -123,9 +390,8 @@
       ],
       "files": [
         {
-          "path": "resources/js/hooks/use-form.ts",
-          "type": "registry:hook",
-          "target": "hooks/twc-ui/use-form.ts"
+          "path": "resources/js/hooks/use-twc-ui-form.ts",
+          "type": "registry:hook"
         }
       ],
       "author": "Danny Spangenberg <danny.spangenberg@twiceware.de>"

@@ -8,9 +8,9 @@ import {
   composeRenderProps,
   Text
 } from 'react-aria-components'
-import { useFormContext } from '@/components/twc-ui/form'
 import { cn } from '@/lib/utils'
 import { FieldError, Label } from './field'
+import { useFormContext } from './form'
 
 const BaseTextField = AriaTextField
 
@@ -75,6 +75,7 @@ interface TextFieldProps extends Omit<AriaTextFieldProps, 'value' | 'onChange'> 
   autoSize?: boolean
   onChange?: ((value: string | null) => void) | ((value: string) => void)
   name?: string
+  placeholder?: string
   value?: string | null | undefined
   error?: string | undefined
   onBlur?: () => void

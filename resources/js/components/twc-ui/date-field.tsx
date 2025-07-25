@@ -1,6 +1,9 @@
 "use client"
 
+import { CalendarDate, type DateValue } from '@internationalized/date'
 import type { VariantProps } from "class-variance-authority"
+import { format, parse } from 'date-fns'
+import React, { useCallback, useMemo } from "react"
 import {
   DateField as AriaDateField,
   type DateFieldProps as AriaDateFieldProps,
@@ -15,12 +18,9 @@ import {
   composeRenderProps,
   Text,
 } from "react-aria-components"
-import { CalendarDate, type DateValue } from '@internationalized/date'
 import { cn } from "@/lib/utils"
 import { FieldError, fieldGroupVariants, Label } from "./field"
-import { useFormContext } from '@/components/twc-ui/form'
-import React, { useCallback, useMemo } from "react"
-import { format, parse } from 'date-fns'
+import { useFormContext } from './form'
 
 const BaseDateField = AriaDateField
 const BaseTimeField = AriaTimeField
@@ -49,7 +49,7 @@ interface DateInputProps
   isInvalid?: boolean
 }
 
-const DATE_FORMAT = import.meta.env.VITE_DATE_FORMAT || 'yyyy-MM-dd'
+const DATE_FORMAT = import.meta.env.VITE_APP_DATE_FORMAT || 'yyyy-MM-dd'
 const TIMEZONE = import.meta.env.VITE_TIMEZONE || 'UTC'
 
 const DateInput = ({

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker",
+  "type": "registry:ui",
+  "title": "Text field",
+  "description": "Text field component",
+  "dependencies": [
+    "class-variance-authority",
+    "react-aria-components",
+    "@hugeicons/core-free-icons",
+    "date-fns",
+    "@react-types/shared",
+    "@internationalized/date"
+  ],
+  "registryDependencies": [
+    "$REGURL/r/form.json",
+    "$REGURL/r/button.json",
+    "$REGURL/r/icon.json",
+    "$REGURL/r/field.json",
+    "$REGURL/r/date-field.json"
+  ],
+  "files": [
+    {
+      "path": "resources/js/components/twc-ui/date-picker.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/twc-ui/date-picker.tsx"
+    }
+  ]
+}

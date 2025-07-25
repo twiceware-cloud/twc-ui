@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "use-form",
+  "name": "use-twc-ui-form",
   "type": "registry:hook",
   "title": "useForm-Hook",
   "description": "useForm-Hook with Laravel Precognition",
@@ -12,9 +12,8 @@
   ],
   "files": [
     {
-      "path": "resources/js/hooks/use-form.ts",
-      "type": "registry:hook",
-      "target": "hooks/twc-ui/use-form.ts"
+      "path": "resources/js/hooks/use-twc-ui-form.ts",
+      "type": "registry:hook"
     }
   ]
 }

@@ -15,9 +15,9 @@ import {
   type Key,
   Text
 } from 'react-aria-components'
-import { useFormContext } from '@/components/twc-ui/form'
 import { cn } from '@/lib/utils'
 import { FieldError, Label } from './field'
+import { useFormContext } from './form'
 import { ListBoxCollection, ListBoxHeader, ListBoxItem, ListBoxSection } from './list-box'
 import { Popover } from './popover'
 
@@ -90,22 +90,29 @@ const SelectListBox = <T extends object>({ className, ...props }: AriaListBoxPro
   />
 )
 
-interface SelectProps<T extends object> extends Omit<AriaSelectProps<T>, 'children'> {
+// Generischer Value-Typ
+type SelectValue = string | number | null
+
+interface SelectProps<T extends object, V extends SelectValue = SelectValue> extends Omit<AriaSelectProps<T>, 'children'> {
   label?: string
   description?: string
   error?: string | ((validation: AriaValidationResult) => string)
   children?: React.ReactNode | ((item: T) => React.ReactNode)
-  onChange: (value: number | null) => void // Geändert von ChangeEvent zu direktem Wert
+  onChange: (value: V) => void // Generischer Value-Typ
+  onBlur?: () => void
   isOptional?: boolean
   optionalValue?: string
-  value: number | null
+  value: V | undefined
   items: Iterable<T>
   itemName?: keyof T & string
   itemValue?: keyof T & string
   name?: string
+  // Neue Props für Value-Konvertierung
+  valueType?: 'string' | 'number' // Bestimmt, welcher Typ zurückgegeben wird
+  nullValue?: V // Wert für "keine Auswahl"
 }
 
-function Select<T extends object>({
+function Select<T extends object, V extends SelectValue = number>({
   label,
   description,
   error,
@@ -118,32 +125,53 @@ function Select<T extends object>({
   isOptional = false,
   optionalValue = '(leer)',
   onChange,
+  onBlur,
   name,
+  value,
+  valueType = 'number',
+  nullValue = (valueType === 'number' ? 0 : null) as V,
   ...props
-}: SelectProps<T>) {
+}: SelectProps<T, V>) {
   const form = useFormContext()
   const realError = form?.errors?.[name as string] || error
   const hasError = !!realError
 
   const itemsWithNothing = isOptional
     ? [
-        {
-          [itemValue]: 0,
-          [itemName]: optionalValue
-        } as T,
-        ...Array.from(items)
-      ]
+      {
+        [itemValue]: nullValue,
+        [itemName]: optionalValue
+      } as T,
+      ...Array.from(items)
+    ]
     : Array.from(items)
 
   const handleSelectionChange = (key: Key | null) => {
-    const numericValue = key ? Number(key) : null
-    onChange(numericValue)
+    if (key === null) {
+      onChange(nullValue)
+      return
+    }
+
+    // Konvertiere basierend auf valueType
+    let convertedValue: V
+    if (valueType === 'string') {
+      convertedValue = String(key) as V
+    } else {
+      convertedValue = Number(key) as V
+    }
+
+    onChange(convertedValue)
   }
+
+  // Konvertiere value zu selectedKey für React Aria
+  const selectedKey = value !== null && value !== undefined ? String(value) : null
 
   return (
     <BaseSelect
       isInvalid={hasError}
+      selectedKey={selectedKey}
       onSelectionChange={handleSelectionChange}
+      onBlur={onBlur}
       className={composeRenderProps(className, className =>
         cn('group flex flex-col gap-1.5 text-sm', className)
       )}
@@ -152,7 +180,7 @@ function Select<T extends object>({
     >
       {label && <Label value={label} />}
       <SelectTrigger autoFocus={autoFocus}>
-        <SelectValue  className="focus-within-0 border-transparent" />
+        <SelectValue className="focus-within-0 border-transparent" />
       </SelectTrigger>
       {description && (
         <Text className="text-muted-foreground text-sm" slot="description">
@@ -163,11 +191,19 @@ function Select<T extends object>({
       <SelectPopover>
         <SelectListBox items={itemsWithNothing}>
           {children ||
-            (item => (
-              <SelectItem id={Number(item[itemValue])}>
-                {typeof item[itemName] === 'string' ? item[itemName] : String(item[itemName])}
-              </SelectItem>
-            ))}
+            (item => {
+              // Sichere Konvertierung zu String für die ID
+              const itemId = String(item[itemValue] ?? '')
+              const itemDisplayName = typeof item[itemName] === 'string'
+                ? item[itemName]
+                : String(item[itemName] ?? '')
+
+              return (
+                <SelectItem id={itemId}>
+                  {itemDisplayName}
+                </SelectItem>
+              )
+            })}
         </SelectListBox>
       </SelectPopover>
     </BaseSelect>

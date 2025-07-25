@@ -12,8 +12,8 @@ import {
   type TextProps as AriaTextProps,
   composeRenderProps
 } from 'react-aria-components'
-import { useFormContext } from '@/components/twc-ui/form'
 import { cn } from '@/lib/utils'
+import { useFormContext } from './form'
 
 const labelVariants = cva([
   'text-sm font-normal leading-none',
@@ -42,7 +42,7 @@ const Label = ({ className, children, value, isRequired = false, ...props }: Lab
 function FormDescription({ className, ...props }: AriaTextProps) {
   return (
     <AriaText
-      className={cn('text-xs text-muted-foreground', className)}
+      className={cn('text-muted-foreground text-xs', className)}
       {...props}
       slot="description"
     />

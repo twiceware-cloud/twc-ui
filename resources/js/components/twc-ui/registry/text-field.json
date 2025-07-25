@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-field",
+  "type": "registry:ui",
+  "title": "Text field",
+  "description": "Text field component",
+  "dependencies": [
+    "class-variance-authority",
+    "react-aria-components"
+  ],
+  "registryDependencies": [
+    "$REGURL/r/form.json",
+    "$REGURL/r/field.json"
+  ],
+  "files": [
+    {
+      "path": "resources/js/components/twc-ui/text-field.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/twc-ui/text-field.tsx"
+    }
+  ]
+}

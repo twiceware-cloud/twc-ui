@@ -12,13 +12,14 @@ import {
 import { cn } from "@/lib/utils"
 
 import { FieldError, Label, labelVariants } from "./field"
+import { useFormContext } from './form'
 
 interface CheckboxProps {
   label?: string
   name: string
   className?: string
   autoFocus?: boolean
-  hasError?: boolean
+  error?: string
   isIndeterminate?: boolean
   isSelected?: boolean
   onChange: (checked: boolean) => void
@@ -137,16 +138,19 @@ const Checkbox = ({
   name,
   className = '',
   autoFocus = false,
-  hasError = false,
   isSelected,
   isIndeterminate = false,
   onChange,
   onBlur,
   checked,
-  children
+  children,
+  ...props
 }: CheckboxProps) => {
   // Use checked as fallback if isSelected is not set
   const actualIsSelected = isSelected !== undefined ? isSelected : !!checked
+  const form = useFormContext()
+  const error = form?.errors?.[name as string] || props.error
+  const hasError = !!error
 
   return (
     <AriaCheckbox

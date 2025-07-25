@@ -8,6 +8,7 @@ import {
   type ListBoxItemProps as AriaListBoxItemProps,
   type ListBoxProps as AriaListBoxProps,
   Section as AriaSection,
+  type Key,
   composeRenderProps
 } from 'react-aria-components'
 
@@ -38,7 +39,7 @@ const ListBoxItem = <T extends object>({
   children,
   id,
   ...props
-}: Omit<AriaListBoxItemProps<T>, 'id'> & { id?: number }) => {
+}: Omit<AriaListBoxItemProps<T>, 'id'> & { id?: Key }) => { // Flexibler Key-Typ
   return (
     <AriaListBoxItem
       textValue={props.textValue || (typeof children === 'string' ? children : undefined)}

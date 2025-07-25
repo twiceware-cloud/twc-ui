@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "list-box",
+  "type": "registry:ui",
+  "title": "List box",
+  "description": "List box component",
+  "dependencies": [
+    "react-aria-components",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "resources/js/components/twc-ui/list-box.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/twc-ui/list-box.tsx"
+    }
+  ]
+}

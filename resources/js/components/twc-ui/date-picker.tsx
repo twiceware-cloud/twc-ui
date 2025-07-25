@@ -1,10 +1,7 @@
-"use client"
-
 import { Calendar04Icon, MultiplicationSignIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
 import { CalendarDate, type DateValue } from '@internationalized/date'
 import type { RangeValue } from '@react-types/shared'
-import { format, parse } from 'date-fns'
+import { format, isValid, parse, parseISO } from 'date-fns'
 import React from 'react'
 import {
   DatePicker as AriaDatePicker,
@@ -20,7 +17,6 @@ import {
   DateRangePickerStateContext,
   Text
 } from 'react-aria-components'
-import { useFormContext } from '@/components/twc-ui/form'
 import { cn } from '@/lib/utils'
 import { Button } from "./button"
 import {
@@ -35,17 +31,44 @@ import {
 } from './calendar'
 import { DateInput } from './date-field'
 import { FieldError, FieldGroup, Label } from './field'
+import { useFormContext } from './form'
+import { Icon } from './icon'
 import { Popover } from './popover'
 
 const BaseDatePicker = AriaDatePicker
 const BaseDateRangePicker = AriaDateRangePicker
 
 // Constants from date-field.tsx for consistency
-const DATE_FORMAT = import.meta.env.VITE_DATE_FORMAT || 'yyyy-MM-dd'
+const DATE_FORMAT = import.meta.env.VITE_APP_DATE_FORMAT || 'yyyy-MM-dd'
 
 // Helper function to convert DateValue avaScript Date (same as in date-field.tsx)
 const dateValueToDate = (dateValue: DateValue): Date => {
   return new Date(dateValue.year, dateValue.month - 1, dateValue.day)
+}
+
+// Hilfsfunktion zum Parsen verschiedener Datumsformate
+const parseToDateValue = (dateString: string): DateValue | null => {
+  if (!dateString) return null
+
+  try {
+    let date: Date | null = null
+
+    // Versuche zuerst ISO-Format (yyyy-MM-dd)
+    if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      date = parseISO(dateString)
+    } else {
+      // Versuche das konfigurierte Format
+      date = parse(dateString, DATE_FORMAT, new Date())
+    }
+
+    if (date && isValid(date)) {
+      return new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate())
+    }
+  } catch (error) {
+    console.warn('Fehler beim Parsen des Datums:', dateString, error)
+  }
+
+  return null
 }
 
 const DatePickerContent = ({
@@ -77,7 +100,7 @@ const DatePickerClearButton = () => {
       className="size-6 flex-none data-[focus-visible]:ring-offset-0"
       onPress={() => state.setValue(null)}
     >
-      <HugeiconsIcon icon={MultiplicationSignIcon} className="size-4" />
+      <Icon icon={MultiplicationSignIcon} className="size-4" />
     </Button>
   )
 }
@@ -94,7 +117,7 @@ const DateRangePickerClearButton = () => {
       className="size-6 flex-none data-[focus-visible]:ring-offset-0"
       onPress={() => state?.setValue(null)}
     >
-      <HugeiconsIcon icon={MultiplicationSignIcon} className="size-4" />
+      <Icon icon={MultiplicationSignIcon} className="size-4" />
     </Button>
   )
 }
@@ -122,15 +145,7 @@ const DatePicker = ({
   const hasError = !!error
 
   const parsedDate = React.useMemo((): DateValue | null => {
-    if (!value) return null
-
-    try {
-      const date = parse(value, DATE_FORMAT, new Date())
-      if (Number.isNaN(date.getTime())) return null
-      return new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate())
-    } catch {
-      return null
-    }
+    return parseToDateValue(value || '')
   }, [value])
 
   // Convert DateValue to string (same logic as DateField)
@@ -173,7 +188,7 @@ const DatePicker = ({
           size="icon"
           className="mr-1 size-6 data-[focus-visible]:ring-offset-0"
         >
-          <HugeiconsIcon icon={Calendar04Icon} className="size-4" />
+          <Icon icon={Calendar04Icon} className="size-4" />
         </Button>
       </FieldGroup>
       {description && (
@@ -204,7 +219,7 @@ interface DateRangePickerProps extends Omit<AriaDateRangePickerProps<DateValue>,
   value?: RangeValue<string> | null
   onChange?: (value: RangeValue<string> | null) => void
   error?: string | ((validation: AriaValidationResult) => string)
-  name: string
+  name?: string
 }
 
 const DateRangePicker = ({
@@ -220,26 +235,38 @@ const DateRangePicker = ({
   const error = form?.errors?.[props.name as string] || props.error
   const hasError = !!error
 
+  console.log('DateRangePicker value:', value)
+
   const parsedDate = React.useMemo((): RangeValue<DateValue> | null => {
-    if (!value?.start || !value.end) return null
+    if (!value?.start || !value.end) {
+      console.log('DateRangePicker: Keine vollständigen Werte vorhanden')
+      return null
+    }
+
+    console.log('DateRangePicker: Parse', value.start, 'bis', value.end)
 
     try {
-      const startDate = parse(value.start, DATE_FORMAT, new Date())
-      const endDate = parse(value.end, DATE_FORMAT, new Date())
+      const startDateValue = parseToDateValue(value.start)
+      const endDateValue = parseToDateValue(value.end)
 
-      if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) return null
+      console.log('DateRangePicker: Parsed zu DateValue:', startDateValue, endDateValue)
+
+      if (!startDateValue || !endDateValue) return null
 
       return {
-        start: new CalendarDate(startDate.getFullYear(), startDate.getMonth() + 1, startDate.getDate()),
-        end: new CalendarDate(endDate.getFullYear(), endDate.getMonth() + 1, endDate.getDate())
+        start: startDateValue,
+        end: endDateValue
       }
-    } catch {
+    } catch (error) {
+      console.warn('DateRangePicker: Fehler beim Parsen:', error)
       return null
     }
   }, [value?.start, value?.end])
 
   // Convert RangeValue<DateValue> to RangeValue<string>
   const handleChange = React.useCallback((newValue: RangeValue<DateValue> | null) => {
+    console.log('DateRangePicker onChange:', newValue)
+
     if (!onChange) return
 
     if (!newValue?.start || !newValue.end) {
@@ -250,12 +277,17 @@ const DateRangePicker = ({
     try {
       const startDate = dateValueToDate(newValue.start)
       const endDate = dateValueToDate(newValue.end)
+
+      // Formatiere immer zu yyyy-MM-dd für die registerDateRange-Funktion
       const formattedRange = {
-        start: format(startDate, DATE_FORMAT),
-        end: format(endDate, DATE_FORMAT)
+        start: format(startDate, 'yyyy-MM-dd'),
+        end: format(endDate, 'yyyy-MM-dd')
       }
+
+      console.log('DateRangePicker: Formatierte Range:', formattedRange)
       onChange(formattedRange)
-    } catch {
+    } catch (error) {
+      console.warn('DateRangePicker: Fehler beim Formatieren:', error)
       onChange(null)
     }
   }, [onChange])
@@ -288,7 +320,7 @@ const DateRangePicker = ({
             size="icon"
             className="size-6 data-[focus-visible]:ring-offset-0"
           >
-            <HugeiconsIcon icon={Calendar04Icon} className="size-4" />
+            <Icon icon={Calendar04Icon} className="size-4" />
           </Button>
         </div>
       </FieldGroup>
@@ -311,6 +343,38 @@ const DateRangePicker = ({
       </DatePickerContent>
     </BaseDateRangePicker>
   )
+}
+
+// Hilfsfunktion für manuelle DateRange-Handler (für Kompatibilität)
+export const createDateRangeChangeHandler = (
+  updateFunction: (name: string, value: any) => void,
+  startFieldName: string,
+  endFieldName: string
+) => {
+  return (rangeValue: RangeValue<string> | null) => {
+    if (rangeValue) {
+      // Konvertiere von yyyy-MM-dd zum konfigurierten Format
+      let startFormatted: string
+      let endFormatted: string
+
+      if (DATE_FORMAT === 'yyyy-MM-dd') {
+        startFormatted = rangeValue.start
+        endFormatted = rangeValue.end
+      } else {
+        const startDate = parseISO(rangeValue.start)
+        const endDate = parseISO(rangeValue.end)
+
+        startFormatted = format(startDate, DATE_FORMAT)
+        endFormatted = format(endDate, DATE_FORMAT)
+      }
+
+      updateFunction(startFieldName, startFormatted)
+      updateFunction(endFieldName, endFormatted)
+    } else {
+      updateFunction(startFieldName, null)
+      updateFunction(endFieldName, null)
+    }
+  }
 }
 
 export {

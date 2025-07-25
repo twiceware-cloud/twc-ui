@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form-group",
+  "type": "registry:ui",
+  "title": "Form Group",
+  "description": "Form Group",
+  "files": [
+    {
+      "path": "resources/js/components/twc-ui/form-group.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/twc-ui/form-group.tsx"
+    }
+  ]
+}
+

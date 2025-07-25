@@ -2,7 +2,7 @@ import type { FormDataConvertible } from '@inertiajs/core'
 import type { RequestMethod, SimpleValidationErrors, ValidationConfig } from 'laravel-precognition'
 import type React from 'react'
 import { createContext, type FormEvent, type HTMLAttributes, useContext } from 'react'
-import { useForm as internalUseForm } from '@/hooks/use-form'
+import { useForm as internalUseForm } from '@/hooks/use-twc-ui-form'
 import { cn } from '@/lib/utils'
 import { FormErrors } from './form-errors'
 
@@ -21,6 +21,7 @@ type ExtendedForm<T extends FormSchema> = {
   isDirty: boolean
   register: UseFormReturn<T>['register']
   registerEvent: UseFormReturn<T>['registerEvent']
+  registerDateRange: UseFormReturn<T>['registerDateRange']
   registerCheckbox: UseFormReturn<T>['registerCheckbox']
   updateAndValidate: UseFormReturn<T>['updateAndValidate']
   updateAndValidateWithoutEvent: UseFormReturn<T>['updateAndValidateWithoutEvent']
@@ -144,6 +145,7 @@ export const useForm = <T extends FormSchema>(
     register: internalForm.register,
     registerEvent: internalForm.registerEvent,
     registerCheckbox: internalForm.registerCheckbox,
+    registerDateRange: internalForm.registerDateRange, // Diese Zeile hinzufügen
     updateAndValidate: internalForm.updateAndValidate,
     updateAndValidateWithoutEvent: internalForm.updateAndValidateWithoutEvent,
     data: internalForm.data,

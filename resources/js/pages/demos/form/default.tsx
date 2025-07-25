@@ -1,14 +1,13 @@
 import { Head } from '@inertiajs/react'
 import { DemoContainer } from '@/components/docs/DemoContainer'
 import { Button } from '@/components/twc-ui/button'
+import { Checkbox } from '@/components/twc-ui/checkbox'
 import { ComboBox } from '@/components/twc-ui/combo-box'
-import { DateField } from '@/components/twc-ui/date-field'
+import { DatePicker } from '@/components/twc-ui/date-picker'
 import { Form, useForm } from '@/components/twc-ui/form'
 import { FormGroup } from '@/components/twc-ui/form-group'
 import { NumberField } from '@/components/twc-ui/number-field'
 import { TextField } from '@/components/twc-ui/text-field'
-import { Checkbox } from '@/components/twc-ui/checkbox'
-import { DatePicker } from '@/components/twc-ui/date-picker'
 
 
 interface Props {
